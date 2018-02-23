@@ -12,7 +12,7 @@ self.addEventListener('install', function(e){
             console.log("[ServiceWorker] Caching cacheFiles");
             return cache.addAll(cacheFiles);
         })
-    );
+    )
 });
 
 self.addEventListener('activate', function(e){
