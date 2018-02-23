@@ -1,3 +1,7 @@
+self.addEventListener('fetch', function(event){
+	console.log(event.request);
+});
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
