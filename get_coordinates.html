@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<title>Polygon arrays</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			html, body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			#map {
+				height: 800px;
+			}
+		</style>
+	</head>
+	<body>
+		<input name="Bermunda" id="Bermunda" class="btn btn-primary" type="button" value="Bermunda" />
+		<input name="kalpana" id="Kalpana" class="btn btn-primary" type="button" value="Kalpana" />
+		<input name="Kharvel" id="Kharvel" class="btn btn-primary" type="button" value="Kharvel" />
+		<input name="Jadev" id="Jadev" class="btn btn-primary" type="button" value="Jadev" />
+		<input name="Patia" id="Patia" class="btn btn-primary" type="button" value="Patia" />
+
+		<div class="form-group">
+			<div id="Coordinates" class="col-lg-2"></div>
+			<div id="map" class="col-lg-10"></div>
+		</div>
+		<br>
+		<hr>
+		
+		<script src="//code.jquery.com/jquery.js"></script>
+		<script>
+			var fill_color = '';
+
+			$(document).on('click', '#Bermunda', function()
+			{
+				$("#Coordinates").append("<br><br><p><b>Bermunda</b></p>");
+				fill_color = 'red';
+			});
+
+			$(document).on('click', '#Kalpana', function()
+			{
+				$("#Coordinates").append("<br><br><p><b>kalpana</b></p>");
+				fill_color = 'blue';
+			});
+
+			$(document).on('click', '#Kharvel', function()
+			{
+				$("#Coordinates").append("<br><br><p><b>Kharvel</b></p>");
+				fill_color = 'yellow';
+			});
+
+			$(document).on('click', '#Jadev', function()
+			{
+				$("#Coordinates").append("<br><br><p><b>Jadev</b></p>");
+				fill_color = 'green';
+			});
+
+			$(document).on('click', '#Patia', function()
+			{
+				$("#Coordinates").append("<br><br><p><b>Patia</b></p>");
+				fill_color = 'cyan';
+			});
+
+			function initMap() {
+				var map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 20.276497, lng: 85.826902},
+					zoom: 13,
+				});
+
+				var marker = new google.maps.Marker({
+								position: {lat: 20.278420, lng: 85.796921},
+								map: map,
+								title: 'Bermunda'
+							});
+
+				var marker = new google.maps.Marker({
+								position: {lat: 20.260596, lng: 85.843728},
+								map: map,
+								title: 'Kalpana'
+							});
+
+				var marker = new google.maps.Marker({
+								position: {lat: 20.275680, lng: 85.843639},
+								map: map,
+								title: 'Karvel'
+							});
+
+				var marker = new google.maps.Marker({
+								position: {lat: 20.307314, lng: 85.820988},
+								map: map,
+								title: 'Jaydev'
+							});
+
+				var marker = new google.maps.Marker({
+								position: {lat: 20.353251, lng: 85.824494},
+								map: map,
+								title: 'Patia'
+							});
+
+				google.maps.event.addListener(map, 'click', function(e) {
+					new google.maps.Marker({
+						position: e.latLng,
+						map: map,
+						icon: {
+							path: google.maps.SymbolPath.CIRCLE,
+							fillColor: fill_color,
+							fillOpacity: .6,
+							strokeColor: 'black',
+							strokeWeight: .5,
+							scale: 4
+						}
+					});
+					$("#Coordinates").append("<p>{lat: " + e.latLng.lat() + ", lng: " + e.latLng.lng() + "}</p>");
+				});
+			}
+		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp1rkMd-LLB9IT26iCVf3U_3g2iV_hgiw&libraries=geometry&callback=initMap"
+				 async defer></script>
+	</body>
+</html>
