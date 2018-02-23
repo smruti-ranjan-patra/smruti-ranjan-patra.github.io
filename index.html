@@ -7,4 +7,17 @@
 	<img src="https://images.familyhomeplans.com/plans/59952/59952-B600.jpg" alt="IMG not found">
 </body>
 <script src="sw.js"></script>
+<script type="text/javascript">
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function() {
+			navigator.serviceWorker.register('/sw.js').then(function(registration) {
+			// Registration was successful
+			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}, function(err) {
+			// registration failed :(
+			console.log('ServiceWorker registration failed: ', err);
+			});
+		});
+	}
+</script>
 </html>
