@@ -1,5 +1,5 @@
 
-const cacheName = "v7";
+const cacheName = "v9";
 const cacheFiles = [
     './'
 ];
