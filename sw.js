@@ -1,32 +1,36 @@
-var CACHE_NAME = 'version-7';
-var urlsToCache = [
-	'./',
+
+const cacheName = "v7";
+const cacheFiles = [
+    './'
 ];
 
 var excludeUrls = [];
 
+self.addEventListener('install', function(e){
+    console.log("[ServiceWorker] Installed");
 
-self.addEventListener('install', function(event){
-	// Perform install steps
-	event.waitUntil(
-	caches.open(CACHE_NAME)
-		.then(function(cache) {
-			console.log('Opened cache');
-		return cache.addAll(urlsToCache);
-		})
-	);
+    e.waitUntil(
+        caches.open(cacheName).then(function(cache){
+            console.log("[ServiceWorker] Caching cacheFiles");
+            return cache.addAll(cacheFiles);
+        })
+    );
 });
 
-/*self.addEventListener('activate', function(event){
-	console.log('Activate event request :- ');
-	console.log(event.request);
-});*/
+self.addEventListener('activate', function(e){
+    console.log("[ServiceWorker] Acticated");
 
-/*self.addEventListener('fetch', function(event){
-	// console.log('Fetch event request :- ');
-	// console.log(event.request);
-	console.log(777);
-});*/
+    e.waitUntil(
+        caches.keys().then(function(cacheNames){
+            return Promise.all(cacheNames.map(function(thisCacheName){
+                if(thisCacheName !== cacheName) {
+                    console.log("[ServiceWorker] Removing cached files from", thisCacheName);
+                    return caches.delete(thisCacheName);
+                }
+            }))
+        })
+    );
+});
 
 self.addEventListener('fetch', function (e) {
     console.log("[ServiceWorker] Fetching", e.request.url);
@@ -61,6 +65,4 @@ self.addEventListener('fetch', function (e) {
             })
         )
     }
-
-    console.log(777);
 });
