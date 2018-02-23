@@ -1,10 +1,8 @@
 
-const cacheName = "v9";
+const cacheName = "version9";
 const cacheFiles = [
     './'
 ];
-
-var excludeUrls = [];
 
 self.addEventListener('install', function(e){
     console.log("[ServiceWorker] Installed");
@@ -13,7 +11,7 @@ self.addEventListener('install', function(e){
         caches.open(cacheName).then(function(cache){
             console.log("[ServiceWorker] Caching cacheFiles");
             return cache.addAll(cacheFiles);
-        })
+        });
     );
 });
 
@@ -27,42 +25,38 @@ self.addEventListener('activate', function(e){
                     console.log("[ServiceWorker] Removing cached files from", thisCacheName);
                     return caches.delete(thisCacheName);
                 }
-            }))
-        })
+            }));
+        });
     );
 });
 
 self.addEventListener('fetch', function (e) {
     console.log("[ServiceWorker] Fetching", e.request.url);
-    const excludeList = excludeUrls.map(function (route) {
-        return e.request.url.includes(route);
-    });
-    if (!excludeList.includes(true)) {
-        e.respondWith(
-            caches.match(e.request).then(function (response) {
-                if (response) {
-                    console.log("[Service Worker] Found in cache", e.request.url)
-                    return response;
-                }
 
-                const requestClone = e.request.clone();
-                fetch(requestClone)
-                    .then(function (response) {
-                        if (!response) {
-                            console.log("[ServiceWorker] No response from fetch");
-                            return response;
-                        }
+    e.respondWith(
+        caches.match(e.request).then(function (response) {
+            if (response) {
+                console.log("[Service Worker] Found in cache", e.request.url);
+                return response;
+            }
 
-                        const responseClone = response.clone();
-                        caches.open(cacheName).then(function (cache) {
-                            cache.put(e.request, responseClone);
-                            return response;
-                        });
-                    })
-                    .catch(function (error) {
-                        console.log("[ServiceWorker] Error Fetching && caching new data");
-                    })
-            })
-        )
-    }
+            const requestClone = e.request.clone();
+            fetch(requestClone)
+                .then(function (response) {
+                    if (!response) {
+                        console.log("[ServiceWorker] No response from fetch");
+                        return response;
+                    }
+
+                    const responseClone = response.clone();
+                    caches.open(cacheName).then(function (cache) {
+                        cache.put(e.request, responseClone);
+                        return response;
+                    });
+                })
+                .catch(function (error) {
+                    console.log("[ServiceWorker] Error Fetching && caching new data");
+                });
+        });
+    );
 });
