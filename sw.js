@@ -1,7 +1,4 @@
-self.addEventListener('fetch', function(event){
-	console.log('Fetch event request :- ');
-	console.log(event.request);
-});
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
@@ -14,3 +11,9 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+
+self.addEventListener('fetch', function(event){
+	console.log('Fetch event request :- ');
+	console.log(event.request);
+});
