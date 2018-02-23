@@ -11,7 +11,7 @@ self.addEventListener('install', function(e){
         caches.open(cacheName).then(function(cache){
             console.log("[ServiceWorker] Caching cacheFiles");
             return cache.addAll(cacheFiles);
-        });
+        })
     );
 });
 
@@ -25,8 +25,8 @@ self.addEventListener('activate', function(e){
                     console.log("[ServiceWorker] Removing cached files from", thisCacheName);
                     return caches.delete(thisCacheName);
                 }
-            }));
-        });
+            }))
+        })
     );
 });
 
@@ -56,7 +56,7 @@ self.addEventListener('fetch', function (e) {
                 })
                 .catch(function (error) {
                     console.log("[ServiceWorker] Error Fetching && caching new data");
-                });
-        });
-    );
+                })
+        })
+    )
 });
