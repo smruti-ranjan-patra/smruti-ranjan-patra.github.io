@@ -1,4 +1,5 @@
 self.addEventListener('fetch', function(event){
+	console.log('Fetch event request :- ');
 	console.log(event.request);
 });
 
