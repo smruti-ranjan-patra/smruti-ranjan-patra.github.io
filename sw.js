@@ -11,5 +11,5 @@ self.addEventListener('activate', function(event){
 self.addEventListener('fetch', function(event){
 	// console.log('Fetch event request :- ');
 	// console.log(event.request);
-	console.log(123);
+	console.log(999);
 });
