@@ -1,4 +1,4 @@
-var CACHE_NAME = 'version-2';
+var CACHE_NAME = 'version-3';
 var urlsToCache = [
 	'./',
 ];
@@ -23,5 +23,5 @@ self.addEventListener('install', function(event){
 self.addEventListener('fetch', function(event){
 	// console.log('Fetch event request :- ');
 	// console.log(event.request);
-	console.log(222);
+	console.log(333);
 });
