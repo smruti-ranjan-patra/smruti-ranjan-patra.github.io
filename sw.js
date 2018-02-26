@@ -1,4 +1,4 @@
-var cacheName = 'v6';
+var cacheName = 'v7';
 
 var cacheFiles = [
 	'./',
@@ -15,7 +15,7 @@ self.addEventListener('install', function(e){
 			return cache.addAll(cacheFiles);
 		})
 	);
-	e.waitUntil(self.skipWaiting());
+	// e.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', function(e){
@@ -31,7 +31,7 @@ self.addEventListener('activate', function(e){
 			}))
 		})
 	);
-	e.waitUntil(self.clients.claim());
+	// e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', function(e){
