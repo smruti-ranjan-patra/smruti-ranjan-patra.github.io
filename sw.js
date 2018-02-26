@@ -1,4 +1,4 @@
-var cacheName = 'v1';
+var cacheName = 'v2';
 
 var cacheFiles = [
 	'./',
@@ -34,6 +34,19 @@ self.addEventListener('activate', function(e){
 
 self.addEventListener('fetch', function(e){
     console.log("[ServiceWorker] Fetched", e.request);
+
+    e.respondWith(
+    	caches.match(e.request).then(function(response) {
+    		if (response) {
+    			console.log("[ServiceWoekr] Found in cache", e.request.url);
+    			return response;
+    		}
+
+    		// var requestClone = e.request.clone();
+
+    		return fetch(e.request);
+    	})
+    )
 });
 
 /*const cacheName = "version-1";
