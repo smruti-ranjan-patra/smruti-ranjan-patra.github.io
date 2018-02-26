@@ -1,4 +1,4 @@
-var cacheName = 'v4';
+var cacheName = 'v5';
 
 var cacheFiles = [
 	'./',
@@ -30,7 +30,8 @@ self.addEventListener('activate', function(e){
 				}
 			}))
 		})
-	)
+	);
+	e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', function(e){
