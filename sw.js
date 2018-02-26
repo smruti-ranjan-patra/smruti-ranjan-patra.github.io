@@ -1,5 +1,20 @@
+var cacheName = 'v6';
+
+var cacheFiles = [
+	'./',
+	'./index.html',
+	'https://images.familyhomeplans.com/plans/59952/59952-B600.jpg'
+];
+
 self.addEventListener('install', function(e){
     console.log("[ServiceWorker] Installed");
+
+    e.waitUntil(
+    		caches.open(cacheName).then(function(cache) {
+    			console.log("[ServiceWorker] Caching cacheFiles");
+    			return cache.addAll(cacheFiles);
+    		})
+    	)
 });
 
 self.addEventListener('activate', function(e){
