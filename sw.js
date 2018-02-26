@@ -42,9 +42,31 @@ self.addEventListener('fetch', function(e){
     			return response;
     		}
 
-    		// var requestClone = e.request.clone();
+    		// return fetch(e.request);
 
-    		return fetch(e.request);
+    		// --------------------------------------------------------
+
+    		var requestClone = e.request.clone();
+
+    		fetch(requestClone)
+	    		.then(function(response) {
+	    			if (!response) {
+	    				console.log("[ServiceWoekr] No response from Fetch");
+	    				return response;
+	    			}
+
+	    			var responseClone = response.clone();
+
+	    			caches.open(cacheName).then(function(cache) {
+	    				cache.put(e.request, responseClones);
+	    				return response;
+	    			});
+	    		})
+	    		.catch(function(err) {
+	    			console.log("[ServiceWoekr] Error in Fetching and Caching new data", err);
+	    		});
+
+	    	// ------------------------------------------------------------
     	})
     )
 });
