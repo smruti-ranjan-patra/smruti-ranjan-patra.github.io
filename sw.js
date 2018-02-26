@@ -14,7 +14,8 @@ self.addEventListener('install', function(e){
 			console.log("[ServiceWorker] Caching cacheFiles");
 			return cache.addAll(cacheFiles);
 		})
-	)
+	);
+	event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', function(e){
