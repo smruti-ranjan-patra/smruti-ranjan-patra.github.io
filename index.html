@@ -5,13 +5,13 @@
 </head>
 <body>
 	<!-- <img src="https://images.familyhomeplans.com/plans/59952/59952-B600.jpg" alt="IMG not found"> -->
-	<img src="https://www.google.co.in/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="IMG not found">
+	<img src="google_img.png" alt="IMG not found">
 </body>
 <!-- <script src="sw.js"></script> -->
 <script type="text/javascript">
 	if ('serviceWorker' in navigator) {
 		window.addEventListener('load', function() {
-			navigator.serviceWorker.register('./sw.js?v=7', {scope: './'}).then(function(registration) {
+			navigator.serviceWorker.register('./sw.js?v=1', {scope: './'}).then(function(registration) {
 			// Registration was successful
 			console.log('ServiceWorker registration successfully');
 		}).catch(function(err) {
