@@ -1,5 +1,16 @@
+self.addEventListener('install', function(e){
+    console.log("[ServiceWorker] Installed");
+});
 
-const cacheName = "version10";
+self.addEventListener('activate', function(e){
+    console.log("[ServiceWorker] Acticated");
+});
+
+self.addEventListener('fetch', function(e){
+    console.log("[ServiceWorker] Fetched");
+});
+
+/*const cacheName = "version-1";
 const cacheFiles = [
     './'
 ];
@@ -59,4 +70,4 @@ self.addEventListener('fetch', function (e) {
                 })
         })
     )
-});
+});*/
