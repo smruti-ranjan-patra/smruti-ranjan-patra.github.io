@@ -1,9 +1,9 @@
-var cacheName = 'v6';
+var cacheName = 'v7';
 
 var cacheFiles = [
 	'./',
 	'./index.html',
-	// 'https://images.familyhomeplans.com/plans/59952/59952-B600.jpg'
+	'https://www.google.co.in/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
 ];
 
 self.addEventListener('install', function(e){
