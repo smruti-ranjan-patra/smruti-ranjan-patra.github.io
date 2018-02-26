@@ -7,8 +7,7 @@ self.addEventListener('activate', function(e){
 });
 
 self.addEventListener('fetch', function(e){
-    console.log("[ServiceWorker] Fetched");
-    console.log("333");
+    console.log("[ServiceWorker] Fetched", e.request);
 });
 
 /*const cacheName = "version-1";
