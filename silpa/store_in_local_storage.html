@@ -4,6 +4,8 @@
 
 <p>When you submit the form, the submit event is stopped and a function is triggered which will store the form data in the local storage of the browser.</p>
 
+  <p><em>Press [ctrl + U] to view the source code</em></p>
+
 <form onsubmit="event.preventDefault(); storeDataToLocalStorage()">
   <p>Enter First name: <input type="text" id="first_name" name="fname"></p>
   <p>Enter age: <input type="number" id="age" name="age"></p>
@@ -25,7 +27,7 @@ window.localStorage.setItem('formDataOfSilpa', jsonInStringFormat);
 
 console.log(JSON.parse(window.localStorage.getItem('formDataOfSilpa')));
 
-alert('See the console log [ctrl+shift+J]');
+alert('See the console log [ctrl + shift + J]');
 
 }
 </script>
