@@ -26,6 +26,9 @@ jsonInStringFormat = JSON.stringify(jsonData);
 window.localStorage.setItem('formDataOfSilpa', jsonInStringFormat);
 
 console.log(JSON.parse(window.localStorage.getItem('formDataOfSilpa')));
+  
+// to remove the data stored in local storage
+// window.localStorage.removeItem('formDataOfSilpa');
 
 alert('See the console log [ctrl + shift + J]');
 
