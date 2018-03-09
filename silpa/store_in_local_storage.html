@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+
 <body>
 
 <p>When you submit the form, the submit event is stopped and a function is triggered which will store the form data in the local storage of the browser.</p>
@@ -11,28 +22,47 @@
   <p>Enter age: <input type="number" id="age" name="age"></p>
   <input type="submit" value="Submit">
 </form>
-
-<script>
-function storeDataToLocalStorage() {
-var jsonData = {};
-var nameElement = document.querySelector('form #first_name');
-var ageElement = document.querySelector('form #age');
-
-jsonData[nameElement.name] = nameElement.value;
-jsonData[ageElement.name] = ageElement.value;
-
-jsonInStringFormat = JSON.stringify(jsonData);
-
-window.localStorage.setItem('formDataOfSilpa', jsonInStringFormat);
-
-console.log(JSON.parse(window.localStorage.getItem('formDataOfSilpa')));
   
-// to remove the data stored in local storage
-// window.localStorage.removeItem('formDataOfSilpa');
+<div id="table">
+</div>
+ 
+<script type="text/javascript">
+function storeDataToLocalStorage() {
+  var jsonData = {};
+  
+  var inputElementData = document.querySelectorAll('form input:not([type="submit"])');
+  
+  inputElementData.forEach(function(element) {
+    jsonData[element.name] = element.value;
+  });
+  
+  var jsonInStringFormat = JSON.stringify(jsonData);
 
-alert('See the console log [ctrl + shift + J]');
+	window.localStorage.setItem('inputFormData', jsonInStringFormat);
+  
+  var formDataInJsonFormat = JSON.parse(window.localStorage.getItem('inputFormData'));
+  
+  var tableString = '<table>\
+  <thead>\
+    <tr>\
+      <th>Name</th>\
+      <th>Value</th>\
+    </tr>\
+  </thead>\
+  <tbody>';
+
+  for (var name in formDataInJsonFormat) {
+    tableString += '<tr><td>' + name + '</td><td>' + formDataInJsonFormat[name] + '</td></tr>';
+  } 
+  
+  tableString += '</tbody></table>';
+  
+  document.querySelector('#table').innerHTML = tableString;
+  
+  window.localStorage.removeItem('inputFormData');
 
 }
+
 </script>
 
 </body>
