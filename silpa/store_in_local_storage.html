@@ -18,8 +18,8 @@ th, td {
   <p><em>Press [ctrl + U] to view the source code</em></p>
 
 <form onsubmit="event.preventDefault(); storeDataToLocalStorage()">
-  <p>Enter First name: <input type="text" id="first_name" name="fname"></p>
-  <p>Enter age: <input type="number" id="age" name="age"></p>
+  <p>Enter First name: <input type="text" id="first_name" name="fname" displayName="First Name"></p>
+  <p>Enter age: <input type="number" id="age" name="age" displayName="Age"></p>
   <input type="submit" value="Submit">
 </form>
   
@@ -33,12 +33,12 @@ function storeDataToLocalStorage() {
   var inputElementData = document.querySelectorAll('form input:not([type="submit"])');
   
   inputElementData.forEach(function(element) {
-    jsonData[element.name] = element.value;
+    jsonData[element.getAttribute('displayName')] = element.value;
   });
   
   var jsonInStringFormat = JSON.stringify(jsonData);
-
-	window.localStorage.setItem('inputFormData', jsonInStringFormat);
+	
+  window.localStorage.setItem('inputFormData', jsonInStringFormat);
   
   var formDataInJsonFormat = JSON.parse(window.localStorage.getItem('inputFormData'));
   
