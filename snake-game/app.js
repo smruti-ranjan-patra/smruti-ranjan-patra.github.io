@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             direction = -1; //left arrow
         } else if (event.keyCode === 40 && direction !== -width) {
             direction = +width; //down arrow
-        } else {
+        } else if ([37,38,39,40].includes(event.keyCode) && isGameRunning) {
             beep(50, 70, 200);
         }
     }
@@ -141,13 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         u.gain.value = vol * 0.01
         v.start(audio.currentTime)
         v.stop(audio.currentTime + duration * 0.001)
-    }
-
-    function stop() {
-        if (isGameRunning) {
-            clearInterval(interval);
-
-        }
     }
 
     document.addEventListener('keyup', setDirection);
