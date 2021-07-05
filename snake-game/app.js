@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grids = document.querySelectorAll('.grid div');
     const scoreBody = document.querySelector('.score span');
-    const startButton = document.querySelector('.start');
+    const button = document.querySelector('.start-stop-button');
+
+    const arrowUp = document.querySelector('.up.arr');
+    const arrowLeft = document.querySelector('.left.arr');
+    const arrowDown = document.querySelector('.down.arr');
+    const arrowRight = document.querySelector('.right.arr');
+
     let audio = new AudioContext();
 
     const height = 20;
@@ -16,18 +22,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let speed = 0.9;
     let interval = 0;
     let intervalTime = 0;
+    let timeOut = 0;
+    let isGameRunning = false;
 
 
     function start() {
-        gameRunning = true;
         clearInterval(interval);
+        clearTimeout(timeOut);
+
+        if (isGameRunning) {
+            isGameRunning = false;
+            button.classList.remove('stop')
+            button.classList.add('start');
+            button.innerText = 'Start / Restart';
+            return;
+        }
+        isGameRunning = true;
+        button.classList.remove('start')
+        button.classList.add('stop');
+        button.innerText = 'Stop';
         grids.forEach(grid => grid.classList.remove('snake', 'food', 'dead-snake', 'food'));
         snake = [5, 4, 3, 2];
         direction = 1; // default right direction
         score = 0;
-        setTimeout(() => insertFood(), delayForFristFoodOccurrence);
+        timeOut = setTimeout(() => insertFood(), delayForFristFoodOccurrence);
         scoreBody.innerText = score;
-        intervalTime = 1000;
+        intervalTime = 200;
         snake.forEach(index => grids[index].classList.add('snake'));
         interval = setInterval(moveSnake, intervalTime)
     }
@@ -103,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function death() {
+        isGameRunning = false;
         beep(50, 50, 600);
         beep(50, 220, 300);
         snake.forEach(index => grids[index].classList.remove('snake'));
@@ -122,6 +143,41 @@ document.addEventListener('DOMContentLoaded', () => {
         v.stop(audio.currentTime + duration * 0.001)
     }
 
-    document.addEventListener('keyup', setDirection)
-    startButton.addEventListener('click', start)
+    function stop() {
+        if (isGameRunning) {
+            clearInterval(interval);
+
+        }
+    }
+
+    document.addEventListener('keyup', setDirection);
+    button.addEventListener('click', start);
+    arrowUp.addEventListener('click', () => {
+        if (direction !== width) {
+            direction = -width; //up arrow
+        } else {
+            beep(50, 70, 200);
+        }
+    });
+    arrowLeft.addEventListener('click', () => {
+        if (direction !== 1) {
+            direction = -1; //left arrow
+        } else {
+            beep(50, 70, 200);
+        }
+    });
+    arrowDown.addEventListener('click', () => {
+        if (direction !== -width) {
+            direction = +width; //down arrow
+        } else {
+            beep(50, 70, 200);
+        }
+    });
+    arrowRight.addEventListener('click', () => {
+        if (direction !== -1) {
+            direction = 1; //right arrow
+        } else {
+            beep(50, 70, 200);
+        }
+    });
 });
