@@ -1,0 +1,31 @@
+.pad20 {
+    padding: 20px;
+}
+
+.grid {
+    width: 440px;
+    height: 440px;
+    display: flex;
+    flex-wrap: wrap;
+    border-style: solid;
+}
+
+.grid div {
+    width: 20px;
+    height: 20px;
+    border: solid 1px white;
+}
+
+.snake {
+    background-color: blue;
+}
+
+.dead-snake {
+    background-color: #d60000;
+}
+
+.food {
+    background-color: greenyellow;
+    border-radius: 50%;
+    display: inline-block;
+}
